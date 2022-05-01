@@ -45,6 +45,7 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    country: str
 
 
 class UserResponse(UserBase):
