@@ -31,11 +31,12 @@ async def create_post(post: schemas.PostCreate, db: Session = Depends(get_db),
     # new_post = cursor.fetchone()
     # conn.commit()
     new_post = models.Post(**post.dict())
+    print(new_post)
     db.add(new_post)
     db.commit()
     # does RETURNING *
     db.refresh(new_post)
-    return new_post
+    return {'Post': new_post, 'votes': 0}
 
 
 @router.get("/{post_id}", response_model=schemas.PostResponse)
