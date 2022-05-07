@@ -1,10 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import posts, users, auth, votes
+
 from . import models
 from .database import engine
+from .routers import posts, users, auth, votes
 
 models.Base.metadata.create_all(bind=engine)
+
+# creates all the models on start
+# models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
@@ -31,4 +35,5 @@ app.include_router(votes.router)
 
 @app.get("/")
 async def root():
-    return {'mock': 'mock'}
+    return {'message': 'hello world'}
+
